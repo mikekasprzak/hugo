@@ -325,7 +325,11 @@ func (formats Formats) FromFilename(filename string) (f Format, found bool) {
 	}
 
 	if outFormat != "" {
-		return formats.GetByName(outFormat)
+		f, found = formats.GetByName(outFormat)
+		if !found {
+			return formats.GetByName(ext)
+		}
+		return
 	}
 
 	if ext != "" {
